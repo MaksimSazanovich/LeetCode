@@ -134,6 +134,7 @@ func missingNumber(_ nums: [Int]) -> Int {
 print(missingNumber([9,6,4,2,3,5,7,0,1]))
 print(missingNumber([1]))
 
+
 func firstBadVersion(_ n: Int) -> Int {
     var arr: [Int] = []
        
@@ -145,3 +146,15 @@ func firstBadVersion(_ n: Int) -> Int {
 }
 
 print(Int.max)
+
+// MARK: - 349. Intersection of Two Arrays
+func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+    
+    var set1: Set<Int> = Set(nums1.map {$0} )
+    var set2 = Set(nums2.map {$0})
+    
+    let result: [Int] = set1.intersection(set2).map {$0}
+    
+    return result
+}
+print(intersection([1,2,2,1], [2,2]))
