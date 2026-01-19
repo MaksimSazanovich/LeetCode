@@ -158,3 +158,26 @@ func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
     return result
 }
 print(intersection([1,2,2,1], [2,2]))
+
+// MARK: - 367. Valid Perfect Square
+func isPerfectSquare(_ num: Int) -> Bool {
+    
+    var left = 0
+    var right = 2147483647
+    
+    while left <= right {
+        let mid = (left + right) / 2
+        
+        if mid * mid == num {
+            return true
+        } else if mid * mid > num {
+            right = mid - 1
+        }
+        else {
+            left = mid + 1
+        }
+    }
+    
+    return false
+}
+print(isPerfectSquare(0))
