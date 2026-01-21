@@ -180,4 +180,27 @@ func isPerfectSquare(_ num: Int) -> Bool {
     
     return false
 }
-print(isPerfectSquare(0))
+print(isPerfectSquare(36))
+
+// MARK: - 69. Sqrt(x)
+func mySqrt(_ x: Int) -> Int {
+    
+    var left = 0
+    var right = x
+    
+    while left <= right {
+        let mid = (left + right) / 2
+        
+        if mid * mid <= x && (mid + 1) * (mid + 1) > x {
+            return mid
+        }
+        else if mid * mid < x {
+            left = mid + 1
+        }
+        else {
+            right = mid - 1
+        }
+    }
+    return -1
+}
+print(mySqrt(0))
