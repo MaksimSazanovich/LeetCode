@@ -204,3 +204,6 @@ func mySqrt(_ x: Int) -> Int {
     return -1
 }
 print(mySqrt(0))
+
+// MARK: - 374. Guess Number Higher or Lower
+//code
