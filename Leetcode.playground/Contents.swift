@@ -207,3 +207,15 @@ print(mySqrt(0))
 
 // MARK: - 374. Guess Number Higher or Lower
 //code
+
+// MARK: - 441. Arranging Coins
+func arrangeCoins(_ n: Int) -> Int {
+    var coins = 0
+    for i in 1...n {
+        coins += i
+        if coins <= n && coins + i + 1 > n {
+            return i
+        }
+    }
+    return -1
+}
