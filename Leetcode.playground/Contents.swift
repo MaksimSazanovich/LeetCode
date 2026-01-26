@@ -219,3 +219,33 @@ func arrangeCoins(_ n: Int) -> Int {
     }
     return -1
 }
+
+// MARK: - 1005. Maximize Sum Of Array After K Negations
+func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
+    var nums = nums.sorted()
+    var k = k
+    var i = 0
+    
+    while i < nums.count && k > 0 && nums[i] < 0 {
+        nums[i] = -nums[i]
+        k -= 1
+        i += 1
+    }
+    print(nums)
+    print(i)
+    
+    var sum = 0
+    var minValue = Int.max
+    
+    for num in nums {
+        sum += num
+        minValue = min(minValue, num)
+    }
+    print(minValue)
+    if k % 2 == 1 {
+        sum -= 2 * minValue
+    }
+    
+    return sum
+}
+print(largestSumAfterKNegations([-1, 3, 2, -10, 5, 4], 3))
