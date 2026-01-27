@@ -268,5 +268,50 @@ func maximumWealth(_ accounts: [[Int]]) -> Int {
 }
 print(maximumWealth([[1,2,3],[3,2,1]]))
 
+// MARK: - 1047. Remove All Adjacent Duplicates In String
+// Bad
+func removeDuplicates(_ s: String) -> String {
+    
+    var s = s
+    
+    var index = s.startIndex
+    var i = 0
+    
+    while index < s.endIndex {
+        
+        if index > s.startIndex && s[index] == s[s.index(index, offsetBy: -1)] {
+            s.remove(at: index)
+            s.remove(at: s.index(index, offsetBy: -1))
+            
+            if s.count == 0 {
+                break
+            }
+     
+            i = 0
+            index = s.startIndex
+        }
+        i += 1
+        index = s.index(after: index)
+        
+    }
+    
+    return s
+}
+print(removeDuplicates("abbaca"))
+
+// Good
+func removeDuplicates2(_ s: String) -> String {
+    var stack = [Character]()
+    
+    for char in s {
+        if let last = stack.last, last == char {
+            stack.removeLast()
+        }
+        else {
+            stack.append(char)
+        }
+    }
+    
+    return String(stack)
 }
 print(removeDuplicates2("aa"))
