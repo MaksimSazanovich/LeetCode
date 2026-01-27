@@ -63,7 +63,7 @@ func numberOfSteps(_ num: Int) -> Int {
         
         steps += 1
     }
-   
+    
     return steps
 }
 print(numberOfSteps(14))
@@ -81,7 +81,7 @@ func searchInsert(_ nums: [Int], _ target: Int) -> Int {
     var right = nums.count - 1
     
     while left <= right {
-    
+        
         var mid = (left + right) / 2
         
         if nums[mid] == target {
@@ -96,7 +96,7 @@ func searchInsert(_ nums: [Int], _ target: Int) -> Int {
             left = mid + 1
         }
         else {
-           
+            
             if nums[mid - 1] < target {
                 return mid
             }
@@ -104,7 +104,7 @@ func searchInsert(_ nums: [Int], _ target: Int) -> Int {
             right = mid - 1
         }
     }
-
+    
     return -1
 }
 print(searchInsert([1], 1))
@@ -137,7 +137,7 @@ print(missingNumber([1]))
 
 func firstBadVersion(_ n: Int) -> Int {
     var arr: [Int] = []
-       
+    
     for item in 1...n {
         arr.append(item)
     }
@@ -249,3 +249,24 @@ func largestSumAfterKNegations(_ nums: [Int], _ k: Int) -> Int {
     return sum
 }
 print(largestSumAfterKNegations([-1, 3, 2, -10, 5, 4], 3))
+
+//MARK: - 1672. Richest Customer Wealth
+func maximumWealth(_ accounts: [[Int]]) -> Int {
+    var maxSum = 0
+    
+    for i in 0..<accounts.count {
+        var sum = 0
+        
+        for j in 0..<accounts[i].count {
+            sum += accounts[i][j]
+        }
+        
+        maxSum = max(sum, maxSum)
+    }
+    
+    return maxSum
+}
+print(maximumWealth([[1,2,3],[3,2,1]]))
+
+}
+print(removeDuplicates2("aa"))
