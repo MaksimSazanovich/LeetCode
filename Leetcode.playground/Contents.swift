@@ -315,3 +315,27 @@ func removeDuplicates2(_ s: String) -> String {
     return String(stack)
 }
 print(removeDuplicates2("aa"))
+
+// MARK: - 167. Two Sum II - Input Array Is Sorted
+func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+    var left = 0
+    var right = numbers.count - 1
+    
+    while left < right {
+        let sum = numbers[left] + numbers[right]
+        
+        if sum == target {
+            return [left + 1, right + 1]
+        }
+        else if sum < target {
+            left += 1
+        }
+        else {
+            right -= 1
+        }
+    }
+    
+    return []
+}
+print(twoSum([2,7,11,15], 9))
+
