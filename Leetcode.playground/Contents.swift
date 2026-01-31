@@ -339,3 +339,25 @@ func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
 }
 print(twoSum([2,7,11,15], 9))
 
+// MARK: - 11. Container With Most Water
+func maxArea(_ height: [Int]) -> Int {
+    var left = 0
+    var right = height.count - 1
+    var maxArea = 0
+    
+    while left < right {
+        let area = (height[left] > height[right] ? height[right] : height[left]) * (right - left)
+        
+        maxArea = max(maxArea, area)
+        
+        if height[left] < height[right] {
+            left += 1
+        }
+        else {
+            right -= 1
+        }
+    }
+    
+    return maxArea
+}
+print(maxArea([1,8,6,2,5,4,8,3,7]))
