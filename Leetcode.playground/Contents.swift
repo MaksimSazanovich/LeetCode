@@ -390,3 +390,55 @@ func isPalindrome(_ s: String) -> Bool {
     return true
 }
 print(isPalindrome("`l;`` 1o1 ??;l`"))
+
+// MARK: - 26. Remove Duplicates from Sorted Array
+// Bad
+func removeDuplicates(_ nums: inout [Int]) -> Int {
+    var result = 1
+    var resultNums = [nums[0]]
+    var dublicateFound = false
+    
+    for (index, num) in nums.enumerated() {
+        if index > 0 {
+            
+            if num == nums[index - 1] {
+                if !dublicateFound {
+                    dublicateFound = true
+                } else {
+                    continue
+                }
+            } else if dublicateFound {
+                dublicateFound = false
+            }
+            
+            if !dublicateFound {
+                resultNums.append(num)
+                result += 1
+            }
+        }
+    }
+    nums = resultNums
+    return result
+}
+var nums = [1, 1, 2]
+print(removeDuplicates(&nums))
+print(nums)
+
+// Good
+func removeDuplicates2(_ nums: inout [Int]) -> Int {
+    guard !nums.isEmpty else { return 0 }
+    
+    var writeIndex = 1
+    
+    for readIndex in 1..<nums.count {
+        if nums[readIndex] != nums[readIndex - 1] {
+            nums[writeIndex] = nums[readIndex]
+            writeIndex += 1
+        }
+    }
+    
+    return writeIndex
+}
+var nums2 = [1, 1, 2]
+print(removeDuplicates2(&nums2))
+print(nums2)
