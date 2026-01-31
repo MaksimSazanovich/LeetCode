@@ -361,3 +361,32 @@ func maxArea(_ height: [Int]) -> Int {
     return maxArea
 }
 print(maxArea([1,8,6,2,5,4,8,3,7]))
+
+// MARK: - 125. Valid Palindrome
+func isPalindrome(_ s: String) -> Bool {
+
+    let delimeters: CharacterSet = .punctuationCharacters.union(.whitespacesAndNewlines).union(CharacterSet(charactersIn: "`"))
+    
+    let newString = s.filter { char in
+        guard let scalar = char.unicodeScalars.first else { return false }
+        return !delimeters.contains(scalar)
+    }.lowercased()
+    
+    print(newString)
+    
+    let chars: [Character] = Array(newString)
+    
+    var left = 0
+    var right = newString.count - 1
+
+    while left < right {
+        if chars[left] != chars[right] {
+            return false
+        } else {
+            left += 1
+            right -= 1
+        }
+    }
+    return true
+}
+print(isPalindrome("`l;`` 1o1 ??;l`"))
