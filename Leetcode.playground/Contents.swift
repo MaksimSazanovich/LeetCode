@@ -442,3 +442,42 @@ func removeDuplicates2(_ nums: inout [Int]) -> Int {
 var nums2 = [1, 1, 2]
 print(removeDuplicates2(&nums2))
 print(nums2)
+
+// MARK: - 80. Remove Duplicates from Sorted Array II
+func removeDuplicates3(_ nums: inout [Int]) -> Int {
+    guard !nums.isEmpty else { return 0 }
+    
+    var writeIndex = 1
+    var acc = 1
+    var k = 0
+    var isStart = true
+    
+    for readIndex in 1..<nums.count {
+        if nums[readIndex] == nums[readIndex - 1] {
+            acc += 1
+        }
+        else if acc >= 3 {
+            print("dsssd")
+            if isStart {
+                while acc > 2 {
+                    nums[readIndex - acc + 2] = nums[readIndex]
+                    acc -= 1
+                }
+                isStart = false
+            } else {
+                while acc > 2 {
+                    nums[readIndex - acc] = nums[readIndex]
+                    acc -= 1
+                }
+            }
+           
+            k += 1
+            acc = 1
+        }
+        print(nums)
+    }
+    return k
+}
+var nums3 = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4] // [1, 1, 2, 2, 3, _, _, _]
+print(removeDuplicates3(&nums3))
+print(nums3)
