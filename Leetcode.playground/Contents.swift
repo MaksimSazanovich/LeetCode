@@ -481,3 +481,31 @@ func removeDuplicates3(_ nums: inout [Int]) -> Int {
 var nums3 = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4] // [1, 1, 2, 2, 3, _, _, _]
 print(removeDuplicates3(&nums3))
 print(nums3)
+
+// MARK: - 977. Squares of a Sorted Array
+func sortedSquares(_ nums: [Int]) -> [Int] {
+    var result = Array(repeating: 0, count: nums.count)
+    
+    var left = 0
+    var right = nums.count - 1
+    var index = nums.count - 1
+    
+    while left <= right {
+        
+        let leftSquare = nums[left] * nums[left]
+        let rightSquare = nums[right] * nums[right]
+        
+        if leftSquare < rightSquare {
+            result[index] = rightSquare
+            right -= 1
+        }
+        else {
+            result[index] = leftSquare
+            left += 1
+        }
+       index -= 1
+    }
+    
+    return result
+}
+print(sortedSquares([-4, -3, -1,0,3,10]))  // [0,1,9,16,100]
