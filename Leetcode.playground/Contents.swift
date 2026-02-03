@@ -474,7 +474,7 @@ func removeDuplicates3(_ nums: inout [Int]) -> Int {
             k += 1
             acc = 1
         }
-        print(nums)
+        //print(nums)
     }
     return k
 }
@@ -509,3 +509,45 @@ func sortedSquares(_ nums: [Int]) -> [Int] {
     return result
 }
 print(sortedSquares([-4, -3, -1,0,3,10]))  // [0,1,9,16,100]
+
+// MARK: - 1876. Substrings of Size Three with Distinct Characters
+func countGoodSubstrings(_ s: String) -> Int {
+    var count = 0
+    
+    guard s.count > 2 else { return 0 }
+    
+    var left = 0
+    var right = 2
+    
+    let string: [Character] = Array(s)
+    var dictionary = [Character: Int]()
+    
+    
+    for i in 0..<string.count {
+        dictionary[string[i], default: 0] += 1
+        
+        if i == right {
+            if dictionary.count == 3 {
+                count += 1
+            }
+            
+            dictionary[string[left]]! -= 1
+            
+            if dictionary[string[left]]! == 0 {
+                dictionary.removeValue(forKey: string[left])
+            }
+            
+            left += 1
+            right += 1
+        }
+    }
+    
+    return count
+}
+print(countGoodSubstrings("xyzzaz")) // xyz yzz zza zaz
+/*
+ l
+ a a b a b c a b c
+     r
+ 
+ */
