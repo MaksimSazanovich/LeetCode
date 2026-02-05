@@ -481,6 +481,7 @@ func removeDuplicates3(_ nums: inout [Int]) -> Int {
 var nums3 = [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4] // [1, 1, 2, 2, 3, _, _, _]
 print(removeDuplicates3(&nums3))
 print(nums3)
+// НЕ РЕШЕНО!!!
 
 // MARK: - 977. Squares of a Sorted Array
 func sortedSquares(_ nums: [Int]) -> [Int] {
@@ -569,3 +570,89 @@ func findLengthOfLCIS(_ nums: [Int]) -> Int {
         return maxLength
 }
 print(findLengthOfLCIS([1, 2, 3, 10, 1, 3]))
+
+
+// MARK: - 978. Longest Turbulent Subarray
+// Bad
+class Solution {
+    func maxTurbulenceSize(_ arr: [Int]) -> Int {
+        guard arr.count > 1 else { return arr.count }
+
+        var maxSize = 2
+        var currentSize = 2
+        var turbulence = TurbulenceType.none
+
+        if arr[0] == arr[1] {
+            currentSize = 1
+            maxSize = 1
+        }
+
+        if arr[0] > arr[1] {
+            turbulence = TurbulenceType.up
+        } else {
+            turbulence = TurbulenceType.down
+        }
+
+        for i in 1..<arr.count - 1 {
+            if turbulence == TurbulenceType.up {
+                if arr[i] < arr[i + 1] {
+                    currentSize += 1
+                    turbulence = TurbulenceType.down
+                } else if  arr[i] > arr[i + 1] {
+                    currentSize = 2
+                    turbulence = TurbulenceType.up
+                } else {
+                    currentSize = 1
+                    turbulence = TurbulenceType.up
+                }
+            } else if turbulence == TurbulenceType.down {
+                if arr[i] > arr[i + 1] {
+                    currentSize += 1
+                    turbulence = TurbulenceType.up
+                } else if arr[i] < arr[i + 1] {
+                    currentSize = 2
+                    turbulence = TurbulenceType.down
+                } else {
+                    currentSize = 1
+                    turbulence = TurbulenceType.down
+                }
+            }
+            maxSize = max(maxSize, currentSize)
+        }
+
+        return maxSize
+    }
+}
+
+/*
+[1, 3, 2, 1]      1 < 3 > 2 > 1
+[0,1,1,0,1,0,1,1,0,0]     0 < 1 = 1 > 0 < 1 > 0 < 1 = 1 > 0 = 0
+*/
+
+enum TurbulenceType {
+    case up
+    case down
+    case none
+}
+
+// Good
+func maxTurbulenceSize2(_ arr: [Int]) -> Int {
+    guard arr.count > 1 else { return arr.count }
+    
+    var maxSize = 1
+    var currentSize = 2
+    
+    for i in 1..<arr.count - 1 {
+        if (arr[i - 1] < arr[i] && arr[i] > arr[i + 1]) || (arr[i - 1] > arr[i] && arr[i] < arr[i + 1]) {
+            currentSize += 1
+        } else if arr[i] == arr[i + 1] {
+            currentSize = 1
+        } else {
+            currentSize = 2
+        }
+        maxSize = max(maxSize, currentSize)
+    }
+    
+    return maxSize
+}
+print(maxTurbulenceSize2([1,3,2,1])) // 1 < 3 > 2 > 1
