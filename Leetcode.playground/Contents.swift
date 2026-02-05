@@ -551,3 +551,21 @@ print(countGoodSubstrings("xyzzaz")) // xyz yzz zza zaz
      r
  
  */
+
+//MARK: - 674. Longest Continuous Increasing Subsequence
+func findLengthOfLCIS(_ nums: [Int]) -> Int {
+        var maxLength = 1
+        var currentLenght = 1
+
+        for i in 0..<nums.count - 1 {
+            if nums[i] < nums[i + 1] {
+                currentLenght += 1
+            } else {
+                currentLenght = 1
+            }
+            maxLength = max(maxLength, currentLenght)
+        }
+
+        return maxLength
+}
+print(findLengthOfLCIS([1, 2, 3, 10, 1, 3]))
