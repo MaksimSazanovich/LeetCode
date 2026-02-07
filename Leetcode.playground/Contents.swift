@@ -656,3 +656,17 @@ func maxTurbulenceSize2(_ arr: [Int]) -> Int {
     return maxSize
 }
 print(maxTurbulenceSize2([1,3,2,1])) // 1 < 3 > 2 > 1
+
+// MARK: - 121. Best Time to Buy and Sell Stock
+func maxProfit(_ prices: [Int]) -> Int {
+        var minPrice = Int.max
+        var maxProfit = 0
+
+        for price in prices {
+            minPrice = min(minPrice, price)
+            maxProfit = max(maxProfit, price - minPrice)
+        }
+
+        return maxProfit
+}
+print(maxProfit([7,1,5,3,6,4]))
