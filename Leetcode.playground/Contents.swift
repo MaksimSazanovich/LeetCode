@@ -670,3 +670,25 @@ func maxProfit(_ prices: [Int]) -> Int {
         return maxProfit
 }
 print(maxProfit([7,1,5,3,6,4]))
+
+// MARK: 217. Contains Duplicate
+func containsDuplicate(_ nums: [Int]) -> Bool {
+        var dict = [Int: Int]()
+
+
+        for num in nums {
+            dict[num, default: 0] += 1
+
+            if dict[num]! >= 2 {
+                return true
+            }
+        }
+
+        for (key, value) in dict {
+            if value >= 2 {
+                return true
+            }
+        }
+
+        return false
+    }
