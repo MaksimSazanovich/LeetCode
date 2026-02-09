@@ -692,3 +692,22 @@ func containsDuplicate(_ nums: [Int]) -> Bool {
 
         return false
     }
+
+// MARK: 448. Find All Numbers Disappeared in an Array
+func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
+        
+        var set = Set<Int>()
+        var result = [Int]()
+
+        for num in nums {
+            set.insert(num)
+        }
+
+        for num in 1...nums.count {
+            if !set.contains(num) {
+                result.append(num)
+            }
+        }
+
+        return result
+}
