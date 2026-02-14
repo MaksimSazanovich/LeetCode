@@ -727,3 +727,70 @@ func singleNumber(_ nums: [Int]) -> Int {
         return set.first ?? -1
 }
 
+// MARK: 5. Longest Palindromic Substring
+func longestPalindrome(_ s: String) -> String {
+       
+       let str = Array(s)
+       var ans = [Character]()
+   
+       
+       for i in 0...str.count {
+           var left = i
+           var right = i
+
+           while left <= right && left >= 0 && right < str.count {
+               if left < 0 || right > str.count - 1 {
+                   break
+               }
+               if str[left] != str[right] {
+                   break
+               }
+
+               if right - left + 1 > ans.count {
+                   ans = Array(str[left...right])
+               }
+               left -= 1
+               right += 1
+           }
+
+           left = i
+           right = i + 1
+
+           while left <= right && left >= 0 && right < str.count {
+               if left < 0 || right > str.count - 1 {
+                   break
+               }
+               if str[left] != str[right] {
+                   break
+               }
+
+               if right - left + 1 > ans.count {
+                   ans = Array(str[left...right])
+               }
+               left -= 1
+               right += 1
+           }
+       }
+
+       return String(ans)
+}
+
+/*
+    |
+b a b a d
+  |
+|
+
+
+    |
+c b b d
+  |
+  |
+
+
+    |
+b a a b d
+  |
+
+
+*/
