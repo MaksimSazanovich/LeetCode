@@ -286,7 +286,7 @@ func removeDuplicates(_ s: String) -> String {
             if s.count == 0 {
                 break
             }
-     
+            
             i = 0
             index = s.startIndex
         }
@@ -364,7 +364,7 @@ print(maxArea([1,8,6,2,5,4,8,3,7]))
 
 // MARK: - 125. Valid Palindrome
 func isPalindrome(_ s: String) -> Bool {
-
+    
     let delimeters: CharacterSet = .punctuationCharacters.union(.whitespacesAndNewlines).union(CharacterSet(charactersIn: "`"))
     
     let newString = s.filter { char in
@@ -378,7 +378,7 @@ func isPalindrome(_ s: String) -> Bool {
     
     var left = 0
     var right = newString.count - 1
-
+    
     while left < right {
         if chars[left] != chars[right] {
             return false
@@ -470,7 +470,7 @@ func removeDuplicates3(_ nums: inout [Int]) -> Int {
                     acc -= 1
                 }
             }
-           
+            
             k += 1
             acc = 1
         }
@@ -504,7 +504,7 @@ func sortedSquares(_ nums: [Int]) -> [Int] {
             result[index] = leftSquare
             left += 1
         }
-       index -= 1
+        index -= 1
     }
     
     return result
@@ -549,25 +549,25 @@ print(countGoodSubstrings("xyzzaz")) // xyz yzz zza zaz
 /*
  l
  a a b a b c a b c
-     r
+ r
  
  */
 
 //MARK: - 674. Longest Continuous Increasing Subsequence
 func findLengthOfLCIS(_ nums: [Int]) -> Int {
-        var maxLength = 1
-        var currentLenght = 1
-
-        for i in 0..<nums.count - 1 {
-            if nums[i] < nums[i + 1] {
-                currentLenght += 1
-            } else {
-                currentLenght = 1
-            }
-            maxLength = max(maxLength, currentLenght)
+    var maxLength = 1
+    var currentLenght = 1
+    
+    for i in 0..<nums.count - 1 {
+        if nums[i] < nums[i + 1] {
+            currentLenght += 1
+        } else {
+            currentLenght = 1
         }
-
-        return maxLength
+        maxLength = max(maxLength, currentLenght)
+    }
+    
+    return maxLength
 }
 print(findLengthOfLCIS([1, 2, 3, 10, 1, 3]))
 
@@ -577,22 +577,22 @@ print(findLengthOfLCIS([1, 2, 3, 10, 1, 3]))
 class Solution {
     func maxTurbulenceSize(_ arr: [Int]) -> Int {
         guard arr.count > 1 else { return arr.count }
-
+        
         var maxSize = 2
         var currentSize = 2
         var turbulence = TurbulenceType.none
-
+        
         if arr[0] == arr[1] {
             currentSize = 1
             maxSize = 1
         }
-
+        
         if arr[0] > arr[1] {
             turbulence = TurbulenceType.up
         } else {
             turbulence = TurbulenceType.down
         }
-
+        
         for i in 1..<arr.count - 1 {
             if turbulence == TurbulenceType.up {
                 if arr[i] < arr[i + 1] {
@@ -619,15 +619,15 @@ class Solution {
             }
             maxSize = max(maxSize, currentSize)
         }
-
+        
         return maxSize
     }
 }
 
 /*
-[1, 3, 2, 1]      1 < 3 > 2 > 1
-[0,1,1,0,1,0,1,1,0,0]     0 < 1 = 1 > 0 < 1 > 0 < 1 = 1 > 0 = 0
-*/
+ [1, 3, 2, 1]      1 < 3 > 2 > 1
+ [0,1,1,0,1,0,1,1,0,0]     0 < 1 = 1 > 0 < 1 > 0 < 1 = 1 > 0 = 0
+ */
 
 enum TurbulenceType {
     case up
@@ -659,138 +659,163 @@ print(maxTurbulenceSize2([1,3,2,1])) // 1 < 3 > 2 > 1
 
 // MARK: - 121. Best Time to Buy and Sell Stock
 func maxProfit(_ prices: [Int]) -> Int {
-        var minPrice = Int.max
-        var maxProfit = 0
-
-        for price in prices {
-            minPrice = min(minPrice, price)
-            maxProfit = max(maxProfit, price - minPrice)
-        }
-
-        return maxProfit
+    var minPrice = Int.max
+    var maxProfit = 0
+    
+    for price in prices {
+        minPrice = min(minPrice, price)
+        maxProfit = max(maxProfit, price - minPrice)
+    }
+    
+    return maxProfit
 }
 print(maxProfit([7,1,5,3,6,4]))
 
 // MARK: 217. Contains Duplicate
 func containsDuplicate(_ nums: [Int]) -> Bool {
-        var dict = [Int: Int]()
-
-
-        for num in nums {
-            dict[num, default: 0] += 1
-
-            if dict[num]! >= 2 {
-                return true
-            }
+    var dict = [Int: Int]()
+    
+    
+    for num in nums {
+        dict[num, default: 0] += 1
+        
+        if dict[num]! >= 2 {
+            return true
         }
-
-        for (key, value) in dict {
-            if value >= 2 {
-                return true
-            }
-        }
-
-        return false
     }
+    
+    for (key, value) in dict {
+        if value >= 2 {
+            return true
+        }
+    }
+    
+    return false
+}
 
 // MARK: 448. Find All Numbers Disappeared in an Array
 func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
-        
-        var set = Set<Int>()
-        var result = [Int]()
-
-        for num in nums {
-            set.insert(num)
+    
+    var set = Set<Int>()
+    var result = [Int]()
+    
+    for num in nums {
+        set.insert(num)
+    }
+    
+    for num in 1...nums.count {
+        if !set.contains(num) {
+            result.append(num)
         }
-
-        for num in 1...nums.count {
-            if !set.contains(num) {
-                result.append(num)
-            }
-        }
-
-        return result
+    }
+    
+    return result
 }
 
 //MARK: 136. Single Number
 func singleNumber(_ nums: [Int]) -> Int {
-        var set = Set<Int>()
-
-        for num in nums {
-            if set.contains(num) {
-                set.remove(num)
-            } else {
-                set.insert(num)
-            }
+    var set = Set<Int>()
+    
+    for num in nums {
+        if set.contains(num) {
+            set.remove(num)
+        } else {
+            set.insert(num)
         }
-
-        return set.first ?? -1
+    }
+    
+    return set.first ?? -1
 }
 
 // MARK: 5. Longest Palindromic Substring
 func longestPalindrome(_ s: String) -> String {
-       
-       let str = Array(s)
-       var ans = [Character]()
-   
-       
-       for i in 0...str.count {
-           var left = i
-           var right = i
-
-           while left <= right && left >= 0 && right < str.count {
-               if left < 0 || right > str.count - 1 {
-                   break
-               }
-               if str[left] != str[right] {
-                   break
-               }
-
-               if right - left + 1 > ans.count {
-                   ans = Array(str[left...right])
-               }
-               left -= 1
-               right += 1
-           }
-
-           left = i
-           right = i + 1
-
-           while left <= right && left >= 0 && right < str.count {
-               if left < 0 || right > str.count - 1 {
-                   break
-               }
-               if str[left] != str[right] {
-                   break
-               }
-
-               if right - left + 1 > ans.count {
-                   ans = Array(str[left...right])
-               }
-               left -= 1
-               right += 1
-           }
-       }
-
-       return String(ans)
+    
+    let str = Array(s)
+    var ans = [Character]()
+    
+    
+    for i in 0...str.count {
+        var left = i
+        var right = i
+        
+        while left <= right && left >= 0 && right < str.count {
+            if left < 0 || right > str.count - 1 {
+                break
+            }
+            if str[left] != str[right] {
+                break
+            }
+            
+            if right - left + 1 > ans.count {
+                ans = Array(str[left...right])
+            }
+            left -= 1
+            right += 1
+        }
+        
+        left = i
+        right = i + 1
+        
+        while left <= right && left >= 0 && right < str.count {
+            if left < 0 || right > str.count - 1 {
+                break
+            }
+            if str[left] != str[right] {
+                break
+            }
+            
+            if right - left + 1 > ans.count {
+                ans = Array(str[left...right])
+            }
+            left -= 1
+            right += 1
+        }
+    }
+    
+    return String(ans)
 }
 
 /*
-    |
-b a b a d
-  |
-|
+ |
+ b a b a d
+ |
+ |
+ 
+ 
+ |
+ c b b d
+ |
+ |
+ 
+ 
+ |
+ b a a b d
+ |
+ 
+ 
+ */
+
+// MARK: 876. Middle of the Linked List
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init() { self.val = 0; self.next = nil; }
+    public init(_ val: Int) { self.val = val; self.next = nil; }
+    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+}
+
+func middleNode(_ head: ListNode?) -> ListNode? {
+    var slow = head
+    var fast = head
+    
+    while fast != nil && fast?.next != nil {
+        slow = slow?.next
+        fast = fast?.next?.next
+    }
+    
+    return slow
+}
 
 
-    |
-c b b d
-  |
-  |
-
-
-    |
-b a a b d
-  |
-
-
-*/
+            return slow
+}
