@@ -794,7 +794,6 @@ func longestPalindrome(_ s: String) -> String {
  
  
  */
-
 // MARK: 876. Middle of the Linked List
 public class ListNode {
     public var val: Int
@@ -816,6 +815,20 @@ func middleNode(_ head: ListNode?) -> ListNode? {
     return slow
 }
 
+// MARK: 206. Reverse Linked List
+func reverseList(_ head: ListNode?) -> ListNode? {
+    var prev: ListNode? = nil
+    var cur: ListNode? = head
+    
+    while cur != nil {
+        var nxt = cur?.next
+        cur?.next = prev
+        prev = cur
+        cur = nxt
+    }
+    
+    return prev
+}
 
             return slow
 }
