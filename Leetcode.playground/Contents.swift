@@ -830,5 +830,42 @@ func reverseList(_ head: ListNode?) -> ListNode? {
     return prev
 }
 
-            return slow
+// MARK: 234. Palindrome Linked List
+func isPalindrome(_ head: ListNode?) -> Bool {
+    
+    var slow = head
+    var fast = head
+    
+    while fast != nil && fast?.next != nil && fast?.next?.next != nil {
+        slow = slow?.next
+        fast = fast?.next?.next
+    }
+    
+    let first_tail = slow
+    let second_head = slow?.next
+    
+    var prev: ListNode? = nil
+    var cur = second_head
+    
+    while cur != nil {
+        let nxt = cur?.next
+        cur?.next = prev
+        prev = cur
+        cur = nxt
+    }
+    
+    var i1 = head
+    var i2 = prev
+    
+    while i2 != nil {
+        if i1?.val != i2?.val {
+            return false
+        }
+        
+        i1 = i1?.next
+        i2 = i2?.next
+    }
+    
+    return true
 }
+
