@@ -869,3 +869,17 @@ func isPalindrome(_ head: ListNode?) -> Bool {
     return true
 }
 
+// MARK: 9. Palindrome Number
+func isPalindrome(_ x: Int) -> Bool {
+    var num = x
+    var rev = 0
+    if x < 0{
+        return false
+    }
+    while num != 0{
+        let digit = num%10
+        rev = rev * 10 + digit
+        num = num/10
+    }
+    return  rev == x
+}
