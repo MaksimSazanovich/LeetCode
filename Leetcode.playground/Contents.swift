@@ -883,3 +883,30 @@ func isPalindrome(_ x: Int) -> Bool {
     }
     return  rev == x
 }
+
+// MARK: 203. Remove Linked List Elements
+func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+    var head = head
+    var cur = head
+    var prev: ListNode? = nil
+    
+    
+    while cur != nil {
+        if cur?.val == val {
+            if cur?.val == head?.val {
+                head = cur?.next
+            } else {
+                prev?.next = cur?.next
+            }
+            cur = cur?.next
+            
+        } else {
+            prev = cur
+            cur = cur?.next
+        }
+        
+        
+    }
+    
+    return head
+}
