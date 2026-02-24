@@ -910,3 +910,20 @@ func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
     
     return head
 }
+
+// MARK: 929. Unique Email Addresses
+func numUniqueEmails(_ emails: [String]) -> Int {
+    var set = Set<String>()
+    var name = ""
+    var dom = ""
+    
+    for email in emails {
+        let parts = email.split(separator: "@", maxSplits: 1)
+        name = String(parts[0].split(separator: "+")[0])
+        name = name.replacing(".", with: "")
+        
+        set.insert(name+"@"+parts[1])
+    }
+    
+    return set.count
+}
