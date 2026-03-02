@@ -927,3 +927,38 @@ func numUniqueEmails(_ emails: [String]) -> Int {
     
     return set.count
 }
+
+// MARK: 643. Maximum Average Subarray I
+func findMaxAverage(_ nums: [Int], _ k: Int) -> Double {
+    var left = 0
+    var right = k
+    
+    var sum = 0
+    var avg: Double = 0
+    var maxAvg: Double = 0
+    
+    for i in 0..<k {
+        sum += nums[i]
+    }
+    avg = Double(sum) / Double(k)
+    maxAvg = avg
+    print(sum)
+    
+    left = 1
+    right = k
+    
+    while right <= nums.count - 1 {
+        print(maxAvg)
+        sum -= nums[left - 1]
+        sum += nums[right]
+        
+        avg = Double(sum) / Double(k)
+        maxAvg = max(avg, maxAvg)
+        
+        
+        left += 1
+        right += 1
+    }
+    
+    return maxAvg
+}
